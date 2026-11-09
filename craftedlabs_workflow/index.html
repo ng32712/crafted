@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1015" />
+  <meta name="description" content="CraftedLabs founder workflow: plan, build, launch and grow an independent digital product store." />
+  <title>CraftedLabs — Founder Workflow</title>
+  <style>
+    :root{
+      --bg:#090e13;--panel:#101820;--panel2:#141f28;--line:#25323d;
+      --text:#edf3f5;--muted:#91a0aa;--accent:#d5ff62;--accent2:#a9d83d;
+      --blue:#8dd7ff;--orange:#ffbd75;--red:#ff8585;--green:#9ee6ae;
+      --radius:18px;--shadow:0 18px 50px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 80% -10%,#1b2a34 0,transparent 35%),var(--bg);color:var(--text);font:15px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+    .app{min-height:100vh;display:grid;grid-template-columns:255px 1fr}
+    aside{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);padding:25px 17px;background:rgba(9,14,19,.86);backdrop-filter:blur(18px);display:flex;flex-direction:column;z-index:5}
+    .brand{display:flex;align-items:center;gap:11px;padding:4px 9px 27px}
+    .brand-mark{width:38px;height:38px;border-radius:12px;background:var(--accent);color:#10170b;display:grid;place-items:center;font-weight:900;font-size:23px}
+    .brand-name{font-weight:800;letter-spacing:-.6px;font-size:18px}
+    .brand-sub{font-size:10px;color:var(--muted);letter-spacing:1.7px}
+    .nav-label{font-size:10px;color:#64737e;text-transform:uppercase;letter-spacing:1.6px;padding:12px 10px 7px}
+    .nav{display:grid;gap:5px}
+    .nav button{border:0;background:transparent;color:#aab6bf;text-align:left;padding:10px 12px;border-radius:10px;display:flex;align-items:center;gap:11px;transition:.2s}
+    .nav button:hover,.nav button.active{background:#1a2831;color:var(--text)}
+    .nav button.active{box-shadow:inset 2px 0 var(--accent);color:var(--accent)}
+    .nav .ico{width:19px;text-align:center;font-size:16px}
+    .side-note{margin-top:auto;padding:14px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#17232b,#101820)}
+    .side-note strong{display:block;font-size:12px;margin-bottom:5px}
+    .side-note p{margin:0;color:var(--muted);font-size:11px}
+    main{min-width:0;padding:30px clamp(18px,4vw,54px) 70px;max-width:1500px;width:100%;margin:auto}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:28px}
+    .eyebrow{color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:750}
+    h1{font-size:clamp(28px,4vw,42px);line-height:1.08;letter-spacing:-1.8px;margin:8px 0 10px}
+    h2{font-size:23px;letter-spacing:-.7px;margin:0 0 8px}
+    h3{font-size:15px;margin:0 0 7px}
+    p{margin:0;color:var(--muted)}
+    .top-actions{display:flex;gap:9px;align-items:center}
+    .pill{border:1px solid var(--line);color:#b6c2c9;border-radius:99px;padding:7px 11px;font-size:11px}
+    .btn{border:1px solid var(--line);background:#17232b;color:var(--text);padding:10px 14px;border-radius:11px;font-weight:650;transition:.2s}
+    .btn:hover{transform:translateY(-1px);border-color:#536674}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:#11180b}
+    .hero{border:1px solid #31414c;border-radius:24px;padding:clamp(22px,4vw,38px);background:linear-gradient(115deg,rgba(27,43,51,.97),rgba(15,24,31,.97));box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero:after{content:"C";position:absolute;right:4%;top:-58px;font-size:290px;line-height:1;color:rgba(213,255,98,.045);font-weight:900;pointer-events:none}
+    .hero-content{position:relative;z-index:1;max-width:700px}
+    .hero h1 span{color:var(--accent)}
+    .hero p{max-width:650px;font-size:15px}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:17px 0 30px}
+    .stat,.card{border:1px solid var(--line);background:rgba(16,24,32,.88);border-radius:var(--radius);padding:17px}
+    .stat small{color:var(--muted);font-size:11px}
+    .stat strong{display:block;font-size:25px;letter-spacing:-1px;margin-top:4px}
+    .stat .hint{font-size:10px;color:#73838e}
+    .section{display:none;animation:fade .25s ease}
+    .section.active{display:block}
+    @keyframes fade{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:none}}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:5px 0 17px}
+    .section-head p{max-width:650px;font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.span-12{grid-column:span 12}
+    .card{min-width:0}
+    .card p{font-size:13px}
+    .card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+    .tag{display:inline-flex;border:1px solid var(--line);border-radius:99px;padding:4px 8px;color:#aab8c0;font-size:10px;white-space:nowrap}
+    .tag.green{color:var(--green);border-color:#31523b}.tag.yellow{color:var(--accent);border-color:#45532b}.tag.blue{color:var(--blue);border-color:#294c5c}
+    .progress-track{height:8px;background:#26343e;border-radius:99px;overflow:hidden;margin:12px 0 7px}
+    .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:99px;transition:width .3s}
+    .progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+    .task-list{display:grid;gap:9px}
+    .task{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(37,50,61,.7)}
+    .task:last-child{border-bottom:0;padding-bottom:0}
+    .task input{accent-color:var(--accent);width:16px;height:16px;margin-top:3px;flex:none}
+    .task label{font-size:13px;cursor:pointer;flex:1}
+    .task label span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+    .task input:checked+label{text-decoration:line-through;color:#71818b}
+    .phase{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--line)}
+    .phase:last-child{border:0}
+    .phase-num{height:34px;width:34px;display:grid;place-items:center;border-radius:11px;background:#24333d;color:var(--accent);font-weight:800}
+    .phase p{font-size:12px}
+    .phase strong{font-size:13px}
+    .category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+    .category{padding:18px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(145deg,#17232c,#101820);min-height:175px}
+    .category .symbol{font-size:24px;margin-bottom:15px}
+    .category p{font-size:12px;margin-top:6px}
+    .category ul{padding-left:17px;margin:10px 0 0;color:#9eabb4;font-size:11px}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;align-items:stretch}
+    .flow-step{background:#17232b;border:1px solid var(--line);border-radius:13px;padding:14px;position:relative}
+    .flow-step b{display:block;font-size:12px;margin:7px 0 4px}
+    .flow-step p{font-size:11px}
+    .flow-step .n{color:var(--accent);font-size:11px;font-weight:800}
+    .warning{border:1px solid #6b5131;background:#2a2118;color:#f4c58f;border-radius:13px;padding:13px;font-size:12px}
+    .success{border:1px solid #31543b;background:#15271c;color:#b9edc4;border-radius:13px;padding:13px;font-size:12px}
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;font-size:12px;min-width:520px}
+    th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line)}
+    th{color:#82919b;font-size:10px;text-transform:uppercase;letter-spacing:1px}
+    td{color:#c7d1d6}
+    code{color:var(--accent);background:#1b2a32;padding:2px 5px;border-radius:5px;font-size:11px}
+    .metric{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12px}
+    .metric:last-child{border:0}
+    .metric span{color:var(--muted)}
+    .callout{border-left:3px solid var(--accent);padding:4px 0 4px 13px;color:#c8d2d7;font-size:13px}
+    .footer{border-top:1px solid var(--line);margin-top:45px;padding-top:18px;color:#687883;font-size:11px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    .mobile-menu{display:none}
+    .filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+    .filter-row button{font-size:11px;padding:7px 10px;border-radius:99px;border:1px solid var(--line);background:transparent;color:#aab6bf}
+    .filter-row button.active{background:#d5ff62;color:#11180b;border-color:#d5ff62}
+    .muted-link{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+    @media(max-width:1050px){.app{grid-template-columns:220px 1fr}.stats{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:760px){
+      .app{display:block}aside{position:fixed;left:-270px;width:255px;transition:left .25s;box-shadow:var(--shadow)}aside.open{left:0}
+      .mobile-menu{display:inline-flex}.topbar{align-items:flex-start}main{padding:20px 15px 50px}
+      .stats{gap:8px}.stat{padding:13px}.stat strong{font-size:21px}
+      .span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12}
+      .category-grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}
+      .section-head{align-items:flex-start;flex-direction:column}
+      .pill.desktop{display:none}
+    }
+    @media(max-width:420px){.flow{grid-template-columns:1fr}.hero:after{right:-40px}.stats{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">C</div>
+      <div><div class="brand-name">CraftedLabs</div><div class="brand-sub">FOUNDER WORKSPACE</div></div>
+    </div>
+    <div class="nav-label">Workspace</div>
+    <nav class="nav" aria-label="Main navigation">
+      <button class="active" data-target="overview"><span class="ico">◈</span> Overview</button>
+      <button data-target="workflow"><span class="ico">⌁</span> Build workflow</button>
+      <button data-target="products"><span class="ico">▤</span> Product strategy</button>
+      <button data-target="store"><span class="ico">▣</span> Store & technology</button>
+      <button data-target="payments"><span class="ico">⌑</span> Payments & delivery</button>
+      <button data-target="growth"><span class="ico">↗</span> Marketing & growth</button>
+      <button data-target="launch"><span class="ico">✓</span> Launch checklist</button>
+    </nav>
+    <div class="side-note">
+      <strong>Founder principle</strong>
+      <p>Build something useful. Prove people want it. Improve it with real feedback.</p>
+    </div>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
+        <div><div class="eyebrow">Independent digital product business</div><div style="font-size:12px;color:var(--muted)">Your plan, from first idea to first customers</div></div>
+      </div>
+      <div class="top-actions"><span class="pill desktop">ZERO-BUDGET START</span><button class="btn" id="resetBtn" title="Clear saved checklist progress">Reset progress</button></div>
+    </div>
+
+    <section id="overview" class="section active">
+      <div class="hero">
+        <div class="hero-content">
+          <div class="eyebrow">Founder blueprint · 2026</div>
+          <h1>Build something <span>people value.</span></h1>
+          <p>CraftedLabs is an independent digital-product store. Create useful e-books and toolkits, present them through a polished website, accept verified payments, deliver purchases securely, and grow through helpful content.</p>
+          <div class="hero-actions">
+            <button class="btn primary" data-go="workflow">Explore the workflow →</button>
+            <button class="btn" data-go="launch">Open launch checklist</button>
+          </div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><small>Launch categories</small><strong>03</strong><div class="hint">Focused starting range</div></div>
+        <div class="stat"><small>First product target</small><strong>01–03</strong><div class="hint">Quality before quantity</div></div>
+        <div class="stat"><small>Initial budget</small><strong>$0</strong><div class="hint">Use free tiers where suitable</div></div>
+        <div class="stat"><small>First milestone</small><strong>1 sale</strong><div class="hint">A real, satisfied customer</div></div>
+      </div>
+      <div class="grid">
+        <div class="card span-7">
+          <div class="card-head"><div><h3>Your overall progress</h3><p>Tick tasks in the workflow and launch sections.</p></div><span class="tag green" id="progressLabel">0% complete</span></div>
+          <div class="progress-track"><div class="progress-fill" id="overallBar"></div></div>
+          <div class="progress-meta"><span id="taskCount">0 of 0 tasks completed</span><span>Saved on this device</span></div>
+        </div>
+        <div class="card span-5">
+          <div class="card-head"><h3>Business model</h3><span class="tag">Direct-to-customer</span></div>
+          <p class="callout">You create and own the products. Customers discover them on your site, pay through a secure provider, and receive access after payment is verified.</p>
+        </div>
+        <div class="card span-12">
+          <div class="card-head"><h3>The simple business loop</h3><span class="tag yellow">Repeat and improve</span></div>
+          <div class="flow">
+            <div class="flow-step"><span class="n">01 / RESEARCH</span><b>Find a real problem</b><p>Listen to a specific audience and validate demand.</p></div>
+            <div class="flow-step"><span class="n">02 / CREATE</span><b>Make a useful product</b><p>Write, design, test and package original content.</p></div>
+            <div class="flow-step"><span class="n">03 / SELL</span><b>Present it clearly</b><p>Explain who it helps, show previews and price it fairly.</p></div>
+            <div class="flow-step"><span class="n">04 / DELIVER</span><b>Fulfil securely</b><p>Verify payment before granting download access.</p></div>
+            <div class="flow-step"><span class="n">05 / GROW</span><b>Learn and improve</b><p>Use feedback and metrics to improve the next version.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="section">
+      <div class="section-head"><div><div class="eyebrow">Execution plan</div><h2>Build workflow</h2><p>Move in sequence. Each phase creates the foundation for the next one. The checkboxes are interactive and saved in your browser.</p></div><span class="tag">Suggested order</span></div>
+      <div class="grid">
+        <div class="card span-8">
+          <div class="card-head"><h3>Milestones and tasks</h3><span class="tag yellow">Do not skip validation</span></div>
+          <div id="workflowTasks" class="task-list"></div>
+        </div>
+        <div class="card span-4">
+          <h3>30-day starter schedule</h3>
+          <div class="phase"><div class="phase-num">01</div><div><strong>Week 1 · Research</strong><p>Choose an audience, inspect competitors, talk to potential buyers and validate a product idea.</p></div><span class="tag">Days 1–7</span></div>
+          <div class="phase"><div class="phase-num">02</div><div><strong>Week 2 · Create</strong><p>Build a small, polished first product and test it with a few target users.</p></div><span class="tag">Days 8–14</span></div>
+          <div class="phase"><div class="phase-num">03</div><div><strong>Week 3 · Store</strong><p>Build the storefront, product pages, policies and payment setup.</p></div><span class="tag">Days 15–21</span></div>
+          <div class="phase"><div class="phase-num">04</div><div><strong>Week 4 · Launch</strong><p>Test checkout and delivery, publish useful content and learn from early customers.</p></div><span class="tag">Days 22–30</span></div>
+        </div>
+        <div class="card span-12">
+          <h3>Important sequence</h3>
+          <p>Validate the problem before spending weeks making products. Verify payment-provider eligibility before designing the entire checkout around one provider. Test secure delivery before accepting real orders.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="section">
+      <div class="section-head"><div><div class="eyebrow">What you sell</div><h2>Product strategy</h2><p>Start with three focused categories. You do not need dozens of e-books at launch; you need a few original products that solve clear problems.</p></div></div>
+      <div class="category-grid">
+        <div class="category"><div class="symbol">✳</div><span class="tag yellow">Category 01</span><h3>AI & Technology</h3><p>Practical technology education for people who want to use modern tools confidently.</p><ul><li>AI starter guides</li><li>Prompting and workflows</li><li>Automation tutorials</li><li>Digital productivity</li></ul></div>
+        <div class="category"><div class="symbol">↗</div><span class="tag blue">Category 02</span><h3>Business & Entrepreneurship</h3><p>Useful resources for people starting and operating small online businesses.</p><ul><li>Digital business basics</li><li>Marketing and branding</li><li>Business planning</li><li>Customer research</li></ul></div>
+        <div class="category"><div class="symbol">⌘</div><span class="tag green">Category 03</span><h3>Programming & Design</h3><p>Practical learning resources and assets for developers and designers.</p><ul><li>HTML, CSS and JavaScript</li><li>React and frontend guides</li><li>UI/UX and Figma resources</li><li>Portfolio toolkits</li></ul></div>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="card span-6">
+          <h3>Possible first products</h3>
+          <div class="task-list">
+            <div class="task"><input type="checkbox" data-task="idea-ai"><label for="">The Practical AI Starter Guide<span>AI & Technology · beginner-friendly, tested examples</span></label></div>
+            <div class="task"><input type="checkbox" data-task="idea-business"><label for="">Build Your First Digital Product Business<span>Business · research, validation and launch workbook</span></label></div>
+            <div class="task"><input type="checkbox" data-task="idea-code"><label for="">The Modern Frontend Developer Handbook<span>Programming & Design · practical projects and code examples</span></label></div>
+          </div>
+        </div>
+        <div class="card span-6">
+          <h3>Product quality checklist</h3>
+          <div class="task-list">
+            <div class="task"><input type="checkbox" data-task="quality-original"><label for="">Original writing, design and licensed assets</label></div>
+            <div class="task"><input type="checkbox" data-task="quality-facts"><label for="">Facts, links, code and screenshots checked</label></div>
+            <div class="task"><input type="checkbox" data-task="quality-value"><label for="">Clear audience, outcome and practical exercises</label></div>
+            <div class="task"><input type="checkbox" data-task="quality-proof"><label for="">Preview pages and final file tested on mobile and desktop</label></div>
+            <div class="task"><input type="checkbox" data-task="quality-rights"><label for="">Copyright, licenses and refund terms reviewed</label></div>
+          </div>
+        </div>
+      </div>
+      <div class="warning" style="margin-top:14px">Do not copy another creator's e-book, course, graphics or paid prompts. AI can assist with drafting, but review, fact-check and edit every product. Sell expertise and usefulness, not recycled AI filler.</div>
+    </section>
+
+    <section id="store" class="section">
+      <div class="section-head"><div><div class="eyebrow">Digital storefront</div><h2>Store & technology</h2><p>A clean storefront with a simple admin system. Add products without changing the website code every time.</p></div></div>
+      <div class="grid">
+        <div class="card span-7">
+          <h3>Website pages</h3>
+          <div class="table-wrap"><table><thead><tr><th>Page</th><th>Purpose</th></tr></thead><tbody>
+            <tr><td><code>/</code> Home</td><td>Brand story, featured products and categories</td></tr>
+            <tr><td><code>/shop</code></td><td>All products, search and filters</td></tr>
+            <tr><td><code>/category/:slug</code></td><td>Products within one category</td></tr>
+            <tr><td><code>/product/:slug</code></td><td>Description, preview, price and buy action</td></tr>
+            <tr><td><code>/checkout</code></td><td>Secure provider-hosted payment</td></tr>
+            <tr><td><code>/library</code></td><td>Customer's purchased downloads</td></tr>
+            <tr><td><code>/admin</code></td><td>Products, orders, categories and analytics</td></tr>
+            <tr><td><code>/legal/*</code></td><td>Terms, privacy, refunds and product license</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="card span-5">
+          <h3>Suggested technology stack</h3>
+          <div class="metric"><b>Frontend</b><span>React + Vite + TypeScript</span></div>
+          <div class="metric"><b>Styling</b><span>Tailwind CSS</span></div>
+          <div class="metric"><b>Animation</b><span>Motion / CSS</span></div>
+          <div class="metric"><b>Database</b><span>Supabase PostgreSQL</span></div>
+          <div class="metric"><b>Authentication</b><span>Supabase Auth</span></div>
+          <div class="metric"><b>File storage</b><span>Private Supabase Storage</span></div>
+          <div class="metric"><b>Backend</b><span>Edge Functions / API</span></div>
+          <div class="metric"><b>Code hosting</b><span>GitHub</span></div>
+          <div class="metric"><b>Deployment</b><span>Commercially permitted host</span></div>
+        </div>
+        <div class="card span-12">
+          <h3>Admin dashboard capabilities</h3>
+          <div class="grid">
+            <div class="span-4"><p><b>Product management</b><br>Upload files, covers, descriptions, prices and category. Draft, publish or unpublish.</p></div>
+            <div class="span-4"><p><b>Order management</b><br>View order status, transaction references, refunds and customer support needs.</p></div>
+            <div class="span-4"><p><b>Business analytics</b><br>Track sales, conversion, refunds, popular products and traffic sources.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="payments" class="section">
+      <div class="section-head"><div><div class="eyebrow">Trust and fulfilment</div><h2>Payments & secure delivery</h2><p>Payment is not complete because a browser displays a success message. Your backend must verify the provider's notification before unlocking a file.</p></div><span class="tag green">Security critical</span></div>
+      <div class="card">
+        <h3>Purchase-to-download workflow</h3>
+        <div class="flow" style="grid-template-columns:repeat(3,1fr)">
+          <div class="flow-step"><span class="n">01</span><b>Choose product</b><p>Customer reads details and selects Buy.</p></div>
+          <div class="flow-step"><span class="n">02</span><b>Create pending order</b><p>Server loads the trusted price and creates a unique order reference.</p></div>
+          <div class="flow-step"><span class="n">03</span><b>Hosted checkout</b><p>Server creates a payment session with the provider.</p></div>
+          <div class="flow-step"><span class="n">04</span><b>Verify webhook</b><p>Check signature, transaction, order, amount and currency server-side.</p></div>
+          <div class="flow-step"><span class="n">05</span><b>Grant entitlement</b><p>Mark paid and record exactly which product the customer owns.</p></div>
+          <div class="flow-step"><span class="n">06</span><b>Deliver securely</b><p>Issue a short-lived signed URL after checking ownership.</p></div>
+        </div>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="card span-7">
+          <h3>Security rules — do not compromise</h3>
+          <div class="task-list">
+            <div class="task"><input type="checkbox" data-task="sec-server-price"><label for="">Price and product ID are validated by the server, not trusted from browser input.</label></div>
+            <div class="task"><input type="checkbox" data-task="sec-private"><label for="">Paid files are stored in private storage, never public folders.</label></div>
+            <div class="task"><input type="checkbox" data-task="sec-webhook"><label for="">Webhook signature is verified on the server.</label></div>
+            <div class="task"><input type="checkbox" data-task="sec-idempotent"><label for="">Webhook handling is idempotent; duplicate events cannot double-grant access.</label></div>
+            <div class="task"><input type="checkbox" data-task="sec-owner"><label for="">Every download checks that the authenticated customer owns the product.</label></div>
+            <div class="task"><input type="checkbox" data-task="sec-secrets"><label for="">API keys and service-role secrets are never exposed in frontend code or Git.</label></div>
+            <div class="task"><input type="checkbox" data-task="sec-test"><label for="">Failed, pending, refunded and disputed payments are tested.</label></div>
+          </div>
+        </div>
+        <div class="card span-5">
+          <h3>Provider options to investigate</h3>
+          <div class="metric"><b>Lemon Squeezy</b><span>Digital sales / Merchant of Record</span></div>
+          <div class="metric"><b>Gumroad</b><span>Hosted digital-product selling</span></div>
+          <div class="metric"><b>Flutterwave</b><span>Payment gateway; local methods</span></div>
+          <p style="margin-top:12px">Confirm Rwanda seller eligibility, account age, identity checks, payout currency, fees, refund handling and business requirements directly with each provider before committing.</p>
+        </div>
+      </div>
+      <div class="warning" style="margin-top:14px"><b>Never:</b> unlock downloads from a success-page URL, expose a public PDF link, trust a price sent by the browser, or put private payment credentials in JavaScript.</div>
+      <div class="success" style="margin-top:10px"><b>Correct principle:</b> Provider-confirmed payment → verified backend event → paid order → customer entitlement → time-limited download link.</div>
+    </section>
+
+    <section id="growth" class="section">
+      <div class="section-head"><div><div class="eyebrow">Audience and revenue</div><h2>Marketing & growth</h2><p>Make content that helps first. Let the product be the natural next step for someone who wants to go deeper.</p></div></div>
+      <div class="grid">
+        <div class="card span-6">
+          <h3>Content channels</h3>
+          <div class="phase"><div class="phase-num">▶</div><div><strong>TikTok / Reels / Shorts</strong><p>Short tutorials, common mistakes, quick wins, product walkthroughs and behind-the-scenes building.</p></div></div>
+          <div class="phase"><div class="phase-num">YT</div><div><strong>YouTube</strong><p>Longer tutorials, comparisons, case studies and detailed demonstrations.</p></div></div>
+          <div class="phase"><div class="phase-num">✉</div><div><strong>Email list</strong><p>Offer a useful free resource, get consent, and send genuinely helpful updates and product launches.</p></div></div>
+          <div class="phase"><div class="phase-num">◎</div><div><strong>Communities and partnerships</strong><p>Answer questions where your audience already gathers. Collaborate honestly; avoid spam.</p></div></div>
+        </div>
+        <div class="card span-6">
+          <h3>One e-book → many content ideas</h3>
+          <div class="task-list">
+            <div class="task"><input type="checkbox" data-task="content-tip"><label for="">A useful tip or lesson from one chapter</label></div>
+            <div class="task"><input type="checkbox" data-task="content-mistake"><label for="">Three mistakes the target reader can avoid</label></div>
+            <div class="task"><input type="checkbox" data-task="content-demo"><label for="">A practical demonstration or screen recording</label></div>
+            <div class="task"><input type="checkbox" data-task="content-preview"><label for="">A preview of a worksheet, template or page</label></div>
+            <div class="task"><input type="checkbox" data-task="content-story"><label for="">Why the product was created and who it helps</label></div>
+          </div>
+        </div>
+        <div class="card span-12">
+          <h3>Growth loop</h3>
+          <div class="flow">
+            <div class="flow-step"><span class="n">ATTRACT</span><b>Helpful content</b><p>Earn attention by teaching something real.</p></div>
+            <div class="flow-step"><span class="n">CAPTURE</span><b>Free resource</b><p>Invite interested visitors to opt into updates.</p></div>
+            <div class="flow-step"><span class="n">CONVERT</span><b>Clear product page</b><p>Show benefits, sample pages and honest details.</p></div>
+            <div class="flow-step"><span class="n">DELIGHT</span><b>Good experience</b><p>Deliver promptly and help customers succeed.</p></div>
+            <div class="flow-step"><span class="n">LEARN</span><b>Feedback and referrals</b><p>Improve the product and earn recommendations.</p></div>
+          </div>
+        </div>
+        <div class="card span-12">
+          <h3>Numbers worth tracking</h3>
+          <div class="grid">
+            <div class="span-4"><div class="metric"><b>Visitors</b><span>Are people finding the store?</span></div><div class="metric"><b>Product views</b><span>Which topics attract interest?</span></div></div>
+            <div class="span-4"><div class="metric"><b>Conversion rate</b><span>Do product pages persuade?</span></div><div class="metric"><b>Refund rate</b><span>Are expectations being met?</span></div></div>
+            <div class="span-4"><div class="metric"><b>Net revenue</b><span>After fees, refunds and costs</span></div><div class="metric"><b>Customer feedback</b><span>What should improve next?</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="launch" class="section">
+      <div class="section-head"><div><div class="eyebrow">Ready responsibly</div><h2>Launch checklist</h2><p>Use this before opening the store to the public. A launch is a controlled test, not a finish line.</p></div><span class="tag yellow">Go / no-go</span></div>
+      <div class="grid">
+        <div class="card span-7">
+          <div class="card-head"><h3>Pre-launch checks</h3><span class="tag green" id="launchProgress">0% done</span></div>
+          <div class="progress-track"><div class="progress-fill" id="launchBar"></div></div>
+          <div id="launchTasks" class="task-list"></div>
+        </div>
+        <div class="card span-5">
+          <h3>Before accepting payments</h3>
+          <div class="warning">Check your legal ability to operate the seller account. If you are under the provider's required age, a parent or legal guardian must handle the account in line with its terms. Never use false identity details.</div>
+          <p style="margin-top:12px">Also check local business, tax, consumer-protection and privacy obligations. This workflow is a planning guide, not legal or tax advice.</p>
+          <h3 style="margin-top:20px">Launch rule</h3>
+          <p class="callout">Do not launch paid downloads until you have completed a real end-to-end test: payment, webhook verification, order status, file permission, email and refund path.</p>
+        </div>
+        <div class="card span-12">
+          <h3>First 90 days after launch</h3>
+          <div class="phase"><div class="phase-num">1</div><div><strong>Days 1–30 · Learn</strong><p>Talk to buyers, inspect support questions, fix confusing product pages and improve onboarding.</p></div><span class="tag">Listen</span></div>
+          <div class="phase"><div class="phase-num">2</div><div><strong>Days 31–60 · Improve</strong><p>Update the best product, publish more useful content and test one pricing or positioning improvement at a time.</p></div><span class="tag">Improve</span></div>
+          <div class="phase"><div class="phase-num">3</div><div><strong>Days 61–90 · Expand carefully</strong><p>Only add another product or category when customer evidence shows a related need.</p></div><span class="tag">Expand</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer"><span>CRAFTEDLABS · FOUNDER WORKFLOW</span><span>Build useful things. Earn trust. Grow deliberately.</span></div>
+  </main>
+</div>
+<script>
+  const workflow = [
+    ["Choose one target audience","Be specific: for example, beginner frontend developers building their first portfolio."],
+    ["Interview or observe 5–10 potential customers","Ask about their current problem and what they have already tried. Do not pitch immediately."],
+    ["Research competing products and reviews","Look for repeated complaints, missing features and realistic pricing—not just competitors' sales claims."],
+    ["Write a one-sentence product promise","Say who it helps, what problem it solves and what the buyer receives."],
+    ["Create a sample or preview","Test interest before making the complete product."],
+    ["Build and edit the first product","Use original content, fact-check details and test every included link or file."],
+    ["Create brand identity and product visuals","Check name, domain, social handles and possible trademark conflicts."],
+    ["Build storefront and product pages","Make the site responsive, accessible, fast and clear."],
+    ["Set up backend, database and admin","Use access rules and server-side operations for sensitive actions."],
+    ["Confirm payment-provider eligibility","Verify country, age, identity, payout method, fees and business requirements."],
+    ["Implement payment webhooks and protected delivery","Test signatures, idempotency, ownership checks and signed URLs."],
+    ["Test the entire purchase and refund journey","Include failed, pending, duplicate, refunded and abandoned checkout cases."],
+    ["Publish helpful marketing content","Teach useful things and direct relevant viewers to the product page."],
+    ["Collect feedback and improve","Use real customer questions, support requests and usage data."]
+  ];
+  const launch = [
+    ["Brand name and visual identity checked","Domain, handles and relevant naming conflicts reviewed."],
+    ["At least one genuinely useful product is ready","Proofread, tested, original and packaged correctly."],
+    ["Product page is complete","Clear description, audience, price, preview, format and support details."],
+    ["Legal pages are published","Terms, privacy, refund policy and product license reviewed."],
+    ["Seller account and payouts are verified","Provider eligibility, identity and payout method confirmed."],
+    ["Payment webhook is secure","Signature, transaction amount, currency and order reference verified."],
+    ["Private file storage is configured","No public access to paid files; signed links expire."],
+    ["Customer library and email delivery work","Only verified purchasers can access their products."],
+    ["Refund and customer support process is ready","Clear contact method and tested refund handling."],
+    ["Mobile, desktop and accessibility checks pass","Navigation, contrast, keyboard use and forms tested."],
+    ["Analytics and consent are configured appropriately","Measure useful events and respect privacy requirements."],
+    ["End-to-end test purchase succeeds","Complete payment-to-download test and confirm no shortcut bypasses payment."]
+  ];
+
+  function renderTasks(containerId, items, prefix){
+    const el=document.getElementById(containerId);
+    el.innerHTML=items.map((item,i)=>{
+      const id=prefix+"-"+i;
+      return `<div class="task"><input type="checkbox" id="${id}" data-task="${id}"><label for="${id}">${item[0]}<span>${item[1]||""}</span></label></div>`;
+    }).join("");
+  }
+  renderTasks("workflowTasks",workflow,"workflow");
+  renderTasks("launchTasks",launch,"launch");
+
+  const STORAGE="craftedlabs-founder-workflow-v1";
+  function readState(){try{return JSON.parse(localStorage.getItem(STORAGE)||"{}")}catch(e){return {}}}
+  function saveState(){
+    const state={};
+    document.querySelectorAll('input[type="checkbox"][data-task]').forEach(x=>state[x.dataset.task]=x.checked);
+    localStorage.setItem(STORAGE,JSON.stringify(state));
+    updateProgress();
+  }
+  function loadState(){
+    const state=readState();
+    document.querySelectorAll('input[type="checkbox"][data-task]').forEach(x=>x.checked=!!state[x.dataset.task]);
+    updateProgress();
+  }
+  function updateProgress(){
+    const all=[...document.querySelectorAll('input[type="checkbox"][data-task]')];
+    const done=all.filter(x=>x.checked).length;
+    const pct=all.length?Math.round(done/all.length*100):0;
+    document.getElementById("overallBar").style.width=pct+"%";
+    document.getElementById("progressLabel").textContent=pct+"% complete";
+    document.getElementById("taskCount").textContent=done+" of "+all.length+" tasks completed";
+    const launchBoxes=[...document.querySelectorAll('#launchTasks input')];
+    const ld=launchBoxes.filter(x=>x.checked).length;
+    const lp=launchBoxes.length?Math.round(ld/launchBoxes.length*100):0;
+    document.getElementById("launchBar").style.width=lp+"%";
+    document.getElementById("launchProgress").textContent=lp+"% done";
+  }
+  document.addEventListener("change",e=>{if(e.target.matches('input[type="checkbox"][data-task]'))saveState()});
+  loadState();
+
+  function showSection(id){
+    document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));
+    document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.target===id));
+    document.getElementById("sidebar").classList.remove("open");
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showSection(b.dataset.target)));
+  document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>showSection(b.dataset.go)));
+  document.getElementById("menuBtn").addEventListener("click",()=>document.getElementById("sidebar").classList.toggle("open"));
+  document.getElementById("resetBtn").addEventListener("click",()=>{
+    if(confirm("Clear all checklist progress saved on this device?")){
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll('input[type="checkbox"][data-task]').forEach(x=>x.checked=false);
+      updateProgress();
+    }
+  });
+</script>
+</body>
+</html>
